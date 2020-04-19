@@ -17,7 +17,13 @@ Case 4. if 'chatCallback' or 'loop' invoked 'getAppManager().requestDestruct()'
 '''
 
 from eudplib import *
-from repl import Application, AppTypedMethod, AppCommand, getAppManager
+from repl import (
+    Application,
+    AppTypedMethod,
+    AppCommand,
+    getAppManager,
+    argEncNumber
+)
 
 manager = getAppManager()
 
@@ -32,7 +38,7 @@ class MyApp(Application):
         Special parameter. cmderr_epd is 
         Caution. Avoid to use lshift (ex. self.var1 << 0)
         '''
-        self.cmdout_epd = manager.allocDb_epd(16 // 4)
+        self.cmd_output_epd = manager.allocDb_epd(16 // 4)
         self.var1 = 0
         self.var2 = 341
 
@@ -40,7 +46,7 @@ class MyApp(Application):
         '''
         You should free variable that had allocated on init()
         '''
-        manager.freeDb_epd(self.cmdout_epd)
+        manager.freeDb_epd(self.cmd_output_epd)
 
     def chatCallback(self, offset):
         '''
@@ -56,6 +62,7 @@ class MyApp(Application):
 
         self.var1 += 1
         self.noReturn(self.var1)
+        manager.requestUpdate()
 
     def print(self, writer):
         '''
@@ -63,7 +70,7 @@ class MyApp(Application):
         '''
         writer.write_f('var1 = %D\n', self.var1)
         writer.write_f('var2 = %D\n', self.var2)
-        writer.write_f('cmd result -> %E', self.cmdout_epd)
+        writer.write_f('cmd result -> %E', self.cmd_output_epd)
 
     def noReturn(self, a):
         self.var2 = a // 4
