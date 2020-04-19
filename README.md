@@ -2,7 +2,7 @@
 
 plugin template for [screpl](https://github.com/mighty1231/screpl)
 
-Check how it works in [link](https://youtu.be/6RexCF3SBFU)
+Check how it works in this [video](https://youtu.be/6RexCF3SBFU)
 
 
 ## Required
@@ -19,9 +19,15 @@ Check how it works in [link](https://youtu.be/6RexCF3SBFU)
 
 ## How to test in a game
 
-Make your euddraft project file (\*.edd) be follows
+* copy a file `prepl.py ` into `plugins` folder in euddraft
+* Make your euddraft project file (\*.edd) be follows
 
 ```
-[repl]
+[main]
+input: INPUT.scx
+output: OUTPUT.scx
+
+[prepl.py]
+superuser: P1
 plugins: mymodule
 ```
