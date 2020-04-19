@@ -1,26 +1,30 @@
+# SC-REPL Plugin Template
 
-Plugin for [screpl](https://github.com/mighty1231/screpl)
+plugin template for [screpl](https://github.com/mighty1231/screpl)
 
-required
 
-* screpl in `lib` folder of euddraft
+## Required
 
-How to 
+`repl` of [screpl](https://github.com/mighty1231/screpl) in `lib` folder of [euddraft](https://github.com/armoha/euddraft)
+
+
+## How to develop
 
 * Copy myapp.py and mymodule.py into `plugins` folder of euddraft
+* Modify files, you could add more apps in a single module
 
 
-Make edd file should as follows
+## How to test in game
+
+Make your euddraft project file (\*.edd) be follows
 
 ```
 [repl]
 
 [mymodule]
-
 ```
 
-or as follow
-
+or
 ```
 [repl]
 
