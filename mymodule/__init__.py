@@ -8,7 +8,8 @@ from .myapp import MyApp
 
 # MY_COMMAND decides how to invoke the command in-game
 # chatting 'openMyApp()' would create the app
-MY_COMMAND = "openMyApp"
+MY_COMMAND1 = "open"
+MY_COMMAND2 = "hello"
 
 @AppCommand([])
 def command1(self):
@@ -30,5 +31,5 @@ def command2(self, n):
     EUDEndWhile()
     rw.write(0)
 
-REPL.addCommand(MY_COMMAND, command1)
-REPL.addCommand("test", command2)
+REPL.addCommand(MY_COMMAND1, command1)
+REPL.addCommand(MY_COMMAND2, command2)

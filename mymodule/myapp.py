@@ -30,17 +30,23 @@ manager = getAppManager()
 class MyApp(Application):
     fields = [
         'var1',
-        'var2'
+        'var2',
+        'trial'
     ]
 
     def init(self):
         '''
-        Special parameter. cmderr_epd is 
+        Initialize members
+
+        'cmd_output_epd' is reserved member to get results of chatCallbacks (compile error etc.)
+        If those results are not necessary, set self.cmd_output_epd as 0
+
         Caution. Avoid to use lshift (ex. self.var1 << 0)
         '''
         self.cmd_output_epd = manager.allocDb_epd(16 // 4)
         self.var1 = 0
         self.var2 = 341
+        self.trial = 0
 
     def destruct(self):
         '''
@@ -52,9 +58,16 @@ class MyApp(Application):
         '''
         Reads command and execute AppCommands given OFFSET as a string pointer
         '''
+        self.trial += 1
+        f_dwwrite_epd(self.cmd_output_epd, 0)
         MyApp.getSuper().chatCallback(offset)
 
     def loop(self):
+        '''
+        You may make the way to destruct your app.
+        This example destruct itself with pressing ESC,
+          but it does not necessarily to be pressing ESC
+        '''
         if EUDIf()(manager.keyPress("ESC")):
             manager.requestDestruct()
             EUDReturn()
@@ -70,7 +83,7 @@ class MyApp(Application):
         '''
         writer.write_f('var1 = %D\n', self.var1)
         writer.write_f('var2 = %D\n', self.var2)
-        writer.write_f('cmd result -> %E', self.cmd_output_epd)
+        writer.write_f('cmd result -> %D: %E\n', self.trial, self.cmd_output_epd)
 
     def noReturn(self, a):
         self.var2 = a // 4
@@ -81,13 +94,23 @@ class MyApp(Application):
         Some methods that should have return must be decorated with AppTypedMethod
           - AppTypedMethod(argtypes, rettypes)
         '''
-        EUDReturn(a+b, a-b)
+        plus = a + b
+        multiply = a * b
+        DoActions([
+            CreateUnit(plus, "Terran Firebat", 1, P1),
+            CreateUnit(multiply, "Terran Marine", 1, P1),
+        ])
+        EUDReturn(plus, multiply)
 
     @AppCommand([argEncNumber, argEncNumber])
-    def plus(self, a, b):
+    def plus(self, x, y):
         '''
-        In-game chat like "plus(3, 4)" executes this
+        In-game chat like "plus(3, 4)" executes this part
         '''
-        c, d = self.someReturns(a, b)
+        DoActions([
+            CreateUnit(x, "Zerg Zergling", 1, P1),
+            CreateUnit(y, "Zerg Hydralisk", 1, P1),
+        ])
+        c, d = self.someReturns(x, y)
         self.var1 = c
         self.var2 = d
