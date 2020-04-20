@@ -1,19 +1,23 @@
 '''
 Application template for REPL
 
-Each application has lifecycle as follows
+A series of methods is executed in each frame as follows.
 
-Case 1. app starts with getAppManager().openApplication(app)
-  - init, chatCallback, loop, print
+Case 1. app starts with getAppManager().startApplication(app)
+  - init, (onChat), loop, print
 
-Case 2. If 'chatCallback' or 'loop' invoked 'getAppManager().requestUpdate()',
-  - chatCallback, loop, print
+Case 2. If 'onChat' or 'loop' invoked 'getAppManager().requestUpdate()',
+  - (onChat), loop, print
 
-Case 3. If 'chatCallback' or 'loop' did not invoked 'getAppManager().requestUpdate()',
-  - chatCallback, loop
+Case 3. If 'onChat' or 'loop' did not invoked 'getAppManager().requestUpdate()',
+  - (onChat), loop
 
-Case 4. if 'chatCallback' or 'loop' invoked 'getAppManager().requestDestruct()'
-  - chatCallback, loop, destruct
+Case 4. If 'onChat' or 'loop' invoked 'getAppManager().requestDestruct()'
+  - (onChat), loop, destruct
+
+Case 5. Previously launched app is dead,
+  - onResume, (onChat), loop
+  - 
 '''
 
 from eudplib import *
@@ -38,7 +42,7 @@ class MyApp(Application):
         '''
         Initialize members
 
-        'cmd_output_epd' is reserved member to get results of chatCallbacks (compile error etc.)
+        'cmd_output_epd' is reserved member to get results of onChats (compile error etc.)
         If those results are not necessary, set self.cmd_output_epd as 0
 
         Caution. Avoid to use lshift (ex. self.var1 << 0)
@@ -54,13 +58,19 @@ class MyApp(Application):
         '''
         manager.freeDb_epd(self.cmd_output_epd)
 
-    def chatCallback(self, offset):
+    def onChat(self, offset):
         '''
-        Reads command and execute AppCommands given OFFSET as a string pointer
+        It reads command and execute AppCommands given OFFSET as a string pointer as a default
         '''
         self.trial += 1
         f_dwwrite_epd(self.cmd_output_epd, 0)
-        MyApp.getSuper().chatCallback(offset)
+        MyApp.getSuper().onChat(offset)
+
+    def onResume(self):
+        '''
+        It is executed exactly once when previously launched app was dead
+        '''
+        pass
 
     def loop(self):
         '''

@@ -15,9 +15,9 @@ MY_COMMAND2 = "hello"
 def command1(self):
     '''
     At here, 'self' will become REPL instance
-    Note that codes after openApplication will not executed
+    Note that codes after startApplication will not executed
     '''
-    getAppManager().openApplication(MyApp)
+    getAppManager().startApplication(MyApp)
 
 @AppCommand([argEncNumber])
 def command2(self, n):
