@@ -30,7 +30,7 @@ euddraft0.*.*.*
 │       ├── __init__.py
 │       ├── app1.py
 │       ├── app2.py
-...
+│       ...
 │       └── appN.py
 ├── plugins
 │   └── prepl.py
@@ -45,7 +45,7 @@ YOUR_PROJECT
 │   ├── __init__.py
 │   ├── app1.py
 │   ├── app2.py
-...
+│   ...
 │   └── appN.py
 └── make.edd
 ```
