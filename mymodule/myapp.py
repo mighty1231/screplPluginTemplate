@@ -4,7 +4,7 @@ Application template for REPL
 When given app is on foreground, a series of methods is executed in each frame as follows.
 
 Case 1. app starts with getAppManager().startApplication(app)
-  - init, (onChat), loop, print
+  - onInit, (onChat), loop, print
 
 Case 2. If 'onChat' or 'loop' invoked 'getAppManager().requestUpdate()',
   - (onChat), loop, print
@@ -13,7 +13,7 @@ Case 3. If 'onChat' or 'loop' did not invoked 'getAppManager().requestUpdate()',
   - (onChat), loop
 
 Case 4. If 'onChat' or 'loop' invoked 'getAppManager().requestDestruct()'
-  - (onChat), loop, destruct
+  - (onChat), loop, onDestruct
 
 Case 5. Previously launched app is dead,
   - onResume, (onChat), loop
@@ -47,7 +47,7 @@ class MyApp(Application):
 
     def onDestruct(self):
         '''
-        You should free variable that had allocated on init()
+        You should free variable that had allocated on onInit()
         '''
         pass
 
@@ -79,8 +79,9 @@ class MyApp(Application):
         Fill your text UI with given WRITER
         WRITER is EUDByteRW instance defined on
          - https://github.com/mighty1231/screpl/blob/master/repl/core/eudbyterw.py
+        Write null-character at the end
         '''
-        pass
+        writer.write(0)
 
     def method_with_no_returns(self, a):
         pass
