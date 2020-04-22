@@ -51,13 +51,13 @@ class MyApp(Application):
         '''
         pass
 
-    def onChat(self, string):
+    def onChat(self, stringptr):
         '''
-        STRING: A pointer to string of chat from superuser
+        STRINGPTR: A pointer to string of chat from superuser
 
         It parses it and execute 'AppCommand' given OFFSET as a string pointer as a default
         '''
-        Application.onChat(offset)
+        Application.onChat(stringptr)
 
     def onResume(self):
         '''
