@@ -1,5 +1,5 @@
 '''
-Application template for REPL
+Application template for SC-REPL
 
 When given app is on foreground, a series of methods is executed in each frame as follows.
 
@@ -28,7 +28,7 @@ from repl import (
     argEncNumber
 )
 
-# import global variables from module
+# import global variables from __init__.py
 from . import manager
 
 class MyApp(Application):

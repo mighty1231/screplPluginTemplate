@@ -1,5 +1,5 @@
 '''
-Module template for REPL
+Plugin template for SC-REPL
 '''
 
 from eudplib import *
