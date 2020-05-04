@@ -15,7 +15,7 @@ Plugin template for [SC-REPL](https://github.com/mighty1231/screpl)
 * Modify your euddraft project file (\*.edd) as follows.
 
 ```
-[prepl.py]
+[prepl]
 superuser: P1
 plugins: OTHER_PLUGINS myplugin
 ```
@@ -26,7 +26,7 @@ plugins: OTHER_PLUGINS myplugin
 euddraft0.*.*.*
 ├── lib
 │   ├── repl
-│   ├── replplugins (plugins provided by SC-REPL)
+│   ├── plugins  // plugins provided by REPL
 │   └── myplugin
 │       ├── __init__.py
 │       ├── app1.py
@@ -50,3 +50,4 @@ YOUR_PROJECT
 │   └── appN.py
 └── your_project.edd
 ```
+* You may use many functionalities of `eudplib`. You can visit [here](https://cafe.naver.com/edac) to get some information.

@@ -77,9 +77,9 @@ class MyApp(Application):
     def print(self, writer):
         '''
         Fill your text UI with given WRITER
-        WRITER is EUDByteRW instance defined on
-         - https://github.com/mighty1231/screpl/blob/master/repl/core/eudbyterw.py
-        Write null-character at the end
+        WRITER is an instance of EUDByteRW
+         - Check https://github.com/mighty1231/screpl/wiki/EUDByteRW
+        It should write null-character after printing all the contents
         '''
         writer.write(0)
 
