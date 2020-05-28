@@ -1,13 +1,13 @@
 # SC-REPL Plugin Template
 
-Plugin template for [SC-REPL](https://github.com/mighty1231/screpl)
+Plugin template for [SC-REPL](https://github.com/mighty1231/screpl) version 1.1.1.
 
 ## Plugin
 
 * Each SC-REPL plugin has a form of python package.
 * Each plugin consists of one \_\_init\_\_.py file and multiple application files.
 * You can add your commands for REPL on \_\_init\_\_.py
-* You can define apps with python codes.
+* You can define your own apps with python codes.
 
 ## How to develop
 
@@ -25,8 +25,10 @@ plugins: OTHER_PLUGINS myplugin
 ```bash
 euddraft0.*.*.*
 ├── lib
-│   ├── repl
-│   ├── plugins  // plugins provided by REPL
+│   ├── screpl
+│   │   ├── apps
+│   │   ├── bridge_server
+│   │   ...
 │   └── myplugin
 │       ├── __init__.py
 │       ├── app1.py
