@@ -11,6 +11,10 @@ command = "start"
 # initialize your global variables at here
 app_manager = get_app_manager()
 
+def plugin_get_dependency():
+    """Returns list of required plugins"""
+    return []
+
 def plugin_setup():
     """Special function that should be defined on SC-REPL plugins
 
